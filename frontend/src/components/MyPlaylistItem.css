@@ -1,0 +1,122 @@
+.playlist-item {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.playlist-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.playlist-item__title {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.playlist-item__creator,
+.playlist-item__created-at,
+.playlist-item__description {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.playlist-item__song-count {
+  font-size: 0.9rem;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.playlist-item__songs {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.playlist-item__song {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.playlist-item__more-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.playlist-item__menu {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.playlist-item__menu button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.playlist-item__menu button:hover {
+  background-color: #f0f8ff;
+}
+
+.playlist-item__deleted-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.playlist-item__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  animation: fadeInOverlay 0.3s forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

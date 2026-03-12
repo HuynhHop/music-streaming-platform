@@ -1,0 +1,17 @@
+/* Add this to UserDashboard.css */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-out; /* Smooth fade-in */
+}
+
+.fade-in.visible {
+  opacity: 1; /* Make the element visible when it comes into view */
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* You can also customize your other components' animations here */

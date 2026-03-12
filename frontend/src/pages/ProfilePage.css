@@ -1,0 +1,296 @@
+/* Hộp thoại Followers (Modal) */
+.followers-list {
+  position: fixed;
+  top: 50%;
+  right: 20px; /* Hộp thoại xuất hiện bên phải */
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  width: 300px; /* Độ rộng của hộp thoại */
+  max-height: 80vh; /* Giới hạn chiều cao */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 10; /* Đảm bảo hộp thoại xuất hiện trên các thành phần khác */
+  transition: transform 0.3s ease; /* Hiệu ứng xuất hiện */
+}
+
+/* Tên tiêu đề của hộp thoại */
+.followers-list h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+/* General Container Styles */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Main Profile Page Wrapper */
+.profile-page {
+  width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-page:hover {
+  transform: translateY(-10px); /* Hover effect */
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.profile-page h2 {
+  font-size: 28px;
+  color: #444;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Profile Field Style */
+.profile-page__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-page__field:hover {
+  transform: translateX(5px); /* Slight hover effect */
+}
+
+.profile-page__field label {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.profile-page__field input,
+.profile-page__field select {
+  padding: 12px 18px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.profile-page__field input:focus,
+.profile-page__field select:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 8px rgba(106, 92, 205, 0.4);
+}
+
+/* Edit and Save Button */
+.profile-page__field button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #6a5acd;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-page__field button:hover {
+  background-color: #5a4abf;
+  transform: translateY(-2px); /* Hover effect */
+}
+
+/* Section for Actions (Password Reset & Delete Account) */
+.profile-page__section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.profile-page__section button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-page__section button:hover {
+  background-color: #f44336;
+  transform: translateY(-2px); /* Hover effect */
+}
+
+/* Popup for Password Reset and Account Deletion */
+.profile-page__password-reset,
+.profile-page__confirm-delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOverlay 0.5s ease-out;
+}
+
+.profile-page__password-reset.show,
+.profile-page__confirm-delete.show {
+  display: flex;
+}
+
+.profile-page__password-reset-content,
+.profile-page__confirm-delete-content {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  width: 450px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Password Reset Inputs */
+.profile-page__password-reset-content input {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.profile-page__password-reset-content input:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 10px rgba(106, 92, 205, 0.4);
+}
+
+.profile-page__password-reset-content button {
+  background-color: #6a5acd;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.profile-page__password-reset-content button:hover {
+  background-color: #5a4abf;
+}
+
+/* Delete Account Confirmation */
+.profile-page__confirm-delete-content {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  width: 450px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease-out;
+}
+
+.profile-page__confirm-delete-content h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-page__confirm-delete-content button {
+  background-color: #ff5252;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.profile-page__confirm-delete-content button:hover {
+  background-color: #f44336;
+}
+
+/* Utility animations for smooth transitions */
+@keyframes fadeInOverlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Nút bình thường */
+.profile-page__field button.normal {
+  background-color: #6a5acd; /* Màu nút bình thường */
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-page__field button.normal:hover {
+  background-color: #5a4abf; /* Màu khi hover */
+  transform: translateY(-2px);
+}
+
+/* Nút cảnh báo (xóa tài khoản) */
+.profile-page__section button.danger {
+  background-color: #ff5252; /* Màu đỏ cho nút xóa */
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-page__section button.danger:hover {
+  background-color: #f44336; /* Màu khi hover */
+  transform: translateY(-2px);
+}
+
+/* Popup xác nhận xóa tài khoản */
+.profile-page__confirm-delete-content button.danger {
+  background-color: #ff5252; /* Màu đỏ cho nút xác nhận xóa */
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-page__confirm-delete-content button.danger:hover {
+  background-color: #f44336; 
+}

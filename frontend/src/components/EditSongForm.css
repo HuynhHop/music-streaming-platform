@@ -1,0 +1,124 @@
+/* EditSongForm Component */
+.edit-song-form-container {
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  font-size: 0.9rem;
+  max-height: 80vh;  /* Giới hạn chiều cao tối đa */
+  overflow-y: auto;  /* Thêm thanh cuộn khi cần */
+}
+
+.edit-song-form-container h2 {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-song-form-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+  font-size: 16px;
+}
+
+.edit-song-form-container input,
+.edit-song-form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.edit-song-form-container input:focus,
+.edit-song-form-container textarea:focus {
+  border-color: #1e90ff;
+  outline: none;
+}
+
+.edit-song-form-container textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.edit-song-form-container .song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.edit-song-form-container .delete-song-btn {
+  background-color: #ff6347;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-song-form-container .delete-song-btn:hover {
+  background-color: #ff4500;
+}
+
+.edit-song-form-container__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.edit-song-form-container__buttons button {
+  padding: 12px 24px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 48%;
+}
+
+.edit-song-form-container__buttons button:hover {
+  background-color: #1c86ee;
+}
+
+.edit-song-form-container__buttons button[type="button"] {
+  background-color: #ff6347;
+}
+
+.edit-song-form-container__buttons button[type="button"]:hover {
+  background-color: #ff4500;
+}
+
+@media (max-width: 768px) {
+  .edit-song-form-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .edit-song-form-container__buttons button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .edit-song-form-container__buttons button[type="button"] {
+    background-color: #f44336;
+  }
+
+  .edit-song-form-container__buttons button[type="button"]:hover {
+    background-color: #d32f2f;
+  }
+}

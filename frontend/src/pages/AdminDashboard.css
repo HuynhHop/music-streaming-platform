@@ -1,0 +1,38 @@
+.admin-dashboard {
+    display: flex; /* Sử dụng flexbox để chia layout */
+    min-height: 100vh;
+  }
+  
+  .admin-dashboard__wrapper {
+    display: flex;
+    width: 100%; /* Cho phép phần sidebar và content chia đều không gian */
+  }
+  
+  .admin-dashboard__content {
+    flex-grow: 1; /* Nội dung chính chiếm hết không gian còn lại */
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .admin-dashboard__sidebar {
+    width: 250px; /* Chiều rộng của sidebar */
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    position: fixed; /* Sidebar luôn cố định */
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-dashboard__sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .admin-dashboard__sidebar a:hover {
+    background-color: #575757;
+  }
+  

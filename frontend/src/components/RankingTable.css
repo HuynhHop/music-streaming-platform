@@ -1,0 +1,165 @@
+/* Bao quanh biểu đồ và bảng xếp hạng */
+.ranking-chart {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* Hiệu ứng fade-in cho toàn bộ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Thêm hiệu ứng cho các tương tác */
+    min-height: 650px; /* Đảm bảo chiều cao đủ chứa hết nội dung */
+}
+
+/* Tiêu đề của bảng xếp hạng */
+.ranking-chart h3 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.5s;
+}
+
+/* Bảng xếp hạng */
+.ranking-table {
+    width: 100%;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+    transition: transform 0.3s ease;
+}
+
+/* Cột tiêu đề của bảng */
+.ranking-table th,
+.ranking-table td {
+    padding: 15px 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cột tiêu đề của bảng */
+.ranking-table th {
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Cột dữ liệu */
+.ranking-table td {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Highlight top 3 bài hát */
+.ranking-table tr.highlight td {
+    background-color: rgb(41, 128, 185, 0.3); /* Màu nền nhạt cho top 3 */
+    color: #0c5a8e; /* Màu chữ đậm cho top 3 */
+    font-weight: bold;
+    animation: highlightTop 0.5s ease; /* Hiệu ứng cho top 3 */
+}
+
+/* Hiệu ứng hover cho các dòng bảng */
+.ranking-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transform: scale(1.02); /* Hiệu ứng phóng to khi hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ khi hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Các kiểu cho biểu đồ cột */
+.chart-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Hiệu ứng fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng highlight cho top 3 bài hát */
+@keyframes highlightTop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Hiệu ứng cho các dòng bảng khi hover */
+.ranking-table tr:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+    transform: translateX(5px); /* Di chuyển nhẹ khi hover */
+}
+
+.ranking-chart h3 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    opacity: 0;
+    animation: fadeInTitle 1s forwards;
+  }
+  
+  /* Hiệu ứng fade-in cho tiêu đề */
+  @keyframes fadeInTitle {
+    from {
+      opacity: 0;
+      transform: translateY(-20px); /* Di chuyển lên trên */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* Vị trí ban đầu */
+    }
+  }
+  
+  .crown-scale {
+    display: inline-block;
+    animation: crown-scale 1s ease-in-out infinite;
+  }
+  
+  @keyframes crown-scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  

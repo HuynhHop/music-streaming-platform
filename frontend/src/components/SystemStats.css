@@ -1,0 +1,99 @@
+/* Thêm kiểu dáng cho toàn bộ phần tử */
+.system-stats {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Thiết kế cho phần lọc tháng */
+  .month-filter {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .month-filter label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .month-filter input {
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  .month-filter button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .month-filter button:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Thiết kế cho phần thông báo khi đang tải */
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+  }
+  
+  /* Thiết kế cho bảng thống kê chi tiết */
+  .stats-table {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  
+  /* Thiết kế cho phần biểu đồ */
+  .chart-container {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    /* Thiết kế cho các màn hình nhỏ */
+    .month-filter {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .month-filter input,
+    .month-filter button {
+      margin-bottom: 10px;
+    }
+  
+    table th, table td {
+      padding: 8px;
+    }
+  }
+  

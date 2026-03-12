@@ -1,0 +1,158 @@
+/* Reset margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container chính */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #000000, #007bff); /* Đồng bộ gradient */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Tiêu đề */
+.login-container h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ecf0f1;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-out;
+}
+
+/* Vai trò */
+.role-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.role-selector button {
+    padding: 12px 20px;
+    margin: 0 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #0984e3;
+    color: #ffffff;
+    width: 120px; /* Kích thước đồng nhất */
+}
+
+.role-selector button.active {
+    background-color: #74b9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.role-selector button:hover {
+    background-color: #74b9ff;
+    transform: scale(1.05);
+}
+
+/* Form container */
+.login-container form {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form group styling */
+.login-container .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.login-container .form-group label {
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #ecf0f1;
+}
+
+.login-container .form-group input {
+    width: 370px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #ffffff;
+    color: #2c3e50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.login-container .form-group input:focus {
+    outline: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+/* Nút đăng nhập */
+.login-container button[type="submit"] {
+    margin-bottom: 20px;
+    width: 350px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0984e3;
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-container button[type="submit"]:hover {
+    background-color: #74b9ff;
+    transform: translateY(-2px);
+}
+
+/* Thông báo lỗi */
+.login-container .error-message {
+    color: #ff7675;
+    font-size: 1em;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Liên kết bổ sung */
+.login-container .additional-links {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.login-container a{
+    color: #ecf0f1;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    margin: 0px 8px;
+}
+
+.login-container a:hover {
+    color: #ffffff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

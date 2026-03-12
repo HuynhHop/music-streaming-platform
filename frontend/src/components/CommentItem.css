@@ -1,0 +1,67 @@
+.song-info-comment-item {
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-left: 5px solid #007bff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .song-info-comment-text {
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.7;
+    margin: 0;
+  }
+  
+  .comment-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  .edit-button, .delete-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-button {
+    background-color: #f1f1f1;
+    color: #007bff;
+  }
+  
+  .edit-button:hover {
+    background-color: #e2e2e2;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background-color: #e60000;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    background-color: #fafafa;
+  }
+  
+  textarea:focus {
+    border-color: #007bff;
+    background-color: #fff;
+  }
+  

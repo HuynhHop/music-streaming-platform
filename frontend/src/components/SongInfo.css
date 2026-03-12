@@ -1,0 +1,572 @@
+.favorites-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorites-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-close-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.song-info {
+  flex-direction: column;
+  background-color: #f5f5f5;
+  font-family: 'Arial', sans-serif;
+  padding: 30px;
+}
+
+.song-info-container {
+  text-align: center;
+}
+
+.song-info-image-container {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid #ccc;
+  padding: 5px;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.song-info-image-container:hover {
+  transform: scale(1.1);
+}
+
+.song-info-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Tiêu đề và thông tin bài hát */
+.song-info-title {
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: 600;
+  margin-top: 0px;
+}
+
+.song-info-artist, .song-info-type {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-top: 0px;
+}
+
+/* Nút like/share */
+.song-info-share-button,
+.song-info-like-button {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin: 10px;
+}
+
+.song-info-share-button {
+  background-color: #f39c12; /* Màu vàng */
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.song-info-share-button:hover {
+  background-color: #f1c40f; /* Màu vàng sáng khi hover */
+  transform: scale(1.1);
+}
+
+.song-info-like-button {
+  background-color: transparent; /* Không nền cho nút yêu thích */
+  border: none;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.song-info-like-button:hover {
+  color: #c0392b; /* Màu đỏ đậm khi hover */
+}
+
+.song-info-like-button:hover {
+  background: transparent; /* Nền vẫn trong suốt khi hover */
+  transform: scale(1.2); /* Phóng to nút lên 1.2 lần */
+}
+
+.song-info-share-button svg,
+.song-info-like-button svg {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Nút phát nhạc */
+.song-info-music-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.song-info-control-button {
+  background-color: #3498db; /* Màu nền xanh lam */
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 50%; /* Bo tròn nút */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+}
+
+.song-info-control-button:hover {
+  background-color: #2980b9; /* Màu nền khi hover */
+  transform: scale(1.1); /* Tăng kích thước khi hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng bóng đổ khi hover */
+}
+
+.song-info-control-button:active {
+  transform: scale(0.95); /* Thu nhỏ khi bấm */
+  box-shadow: none; /* Bỏ bóng khi bấm */
+}
+
+.song-info-control-button outlet-button {
+  background-color: #e67e22; /* Màu cam cho nút outlet */
+}
+
+.song-info-control-button.song-info-report-button {
+  background-color: #e74c3c; /* Màu đỏ cho nút báo cáo */
+}
+
+.song-info-control-button.song-info-report-button:hover {
+  background-color: #e23622; /* Màu đỏ cho nút báo cáo */
+}
+
+.song-info-control-button outlet-button:hover,
+.song-info-control-button.song-info-report-button:hover {
+  background-color: #d35400; /* Màu cam đậm cho outlet khi hover */
+}
+
+.song-info-control-button svg {
+  font-size: 1rem; /* Điều chỉnh kích thước icon */
+  transition: transform 0.3s ease;
+}
+
+.song-info-control-button:hover svg {
+  transform: scale(1.2); /* Phóng to icon khi hover */
+}
+
+/* Thanh thời gian */
+.song-info-time-slider-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.song-info-time-slider {
+  flex: 1;
+  background: transparent;
+  border: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.song-info-time-slider:focus {
+  outline: none;
+}
+
+.song-info-time-slider::-webkit-slider-runnable-track {
+  background: #8499a9;
+  border-radius: 5px;
+}
+
+.song-info-time-slider::-webkit-slider-thumb {
+  appearance: none;
+  background: #2980b9;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+
+.song-info-time-slider::-moz-range-track {
+  background: #3498db;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.song-info-time-slider::-moz-range-thumb {
+  background: #2980b9;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.song-info-time-display {
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+/* Phần bình luận */
+.song-info-comments-section {
+  margin-top: 40px;
+  text-align: left;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-info-comment-form {
+  margin-bottom: 20px;
+}
+
+.song-info-comment-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.3s ease;
+}
+
+.song-info-comment-form textarea:focus {
+  border-color: #3498db;
+}
+
+.song-info-comment-submit {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.song-info-comment-submit:hover {
+  background-color: #2980b9;
+}
+
+/* Danh sách bình luận */
+.song-info-comments-list {
+  height: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+/* Bình luận */
+.song-info-comment-item {
+  margin-bottom: 15px;
+  padding: 12px;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.song-info-comment-text {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Responsive: đảm bảo giao diện phù hợp với màn hình nhỏ */
+@media (max-width: 768px) {
+  .song-info-image-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .song-info-title {
+    font-size: 1.5rem;
+  }
+
+  .song-info-artist, .song-info-type {
+    font-size: 1rem;
+  }
+
+  .song-info-music-controls {
+    flex-direction: column;
+  }
+
+  .song-info-control-button {
+    margin: 5px;
+    padding: 10px 20px;
+  }
+
+  .song-info-time-slider-container {
+    width: 100%;
+  }
+
+  .song-info-time-slider {
+    width: 90%;
+  }
+}
+
+.song-info-artist-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.song-info-artist-link:hover {
+  color: #2980b9;
+}
+
+/* Nút tùy chọn */
+.song-info-control-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.song-info-control-button:hover {
+  background-color: #2980b9;
+}
+
+.song-info-control-button svg {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* Menu Tùy Chọn */
+.song-info-options-menu {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-info-option-item {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.song-info-option-item:hover {
+  background-color: #2980b9;
+}
+
+.song-info-more-options {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  top: 50px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.song-info-more-options button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.song-info-more-options button:hover {
+  background-color: #2980b9;
+}
+
+.playlist-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.playlist-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.playlist-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlist-menu-item {
+  margin: 10px 0;
+}
+
+.playlist-menu-item button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.playlist-menu-item button:hover {
+  background-color: #e0e0e0;
+}
+
+.song-info-report-button{
+  background-color: red;
+}
+
+.song-info-layout {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.song-info-left {
+  width: 48%; /* Chiếm 48% chiều rộng */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.song-info-right {
+  width: 48%; /* Chiếm 48% chiều rộng */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.song-info-lyrics {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.song-info-lyrics h3 {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.song-info-lyrics-text {
+  font-size: 1rem;
+  color: #7f8c8d;
+  white-space: pre-wrap; /* Đảm bảo lyrics được hiển thị đúng với các dòng */
+  word-wrap: break-word;
+  line-height: 1.6;
+  width: 500px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.song-info-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.song-info-time-slider-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.song-info-volume-slider {
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background: #bdc3c7;
+  cursor: pointer;
+}
+
+.song-info-volume-slider::-webkit-slider-thumb {
+  background: #3498db; /* Màu xanh cho thanh trượt */
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.song-info-volume-slider:hover::-webkit-slider-thumb {
+  background: #2980b9; /* Màu xanh đậm khi hover */
+}
+
+.song-info-details{
+  width: 100%;
+}

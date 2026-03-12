@@ -1,0 +1,218 @@
+/* Container for adding a new song */
+.add-song-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+/* Input for new song title */
+.add-song-container input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Button styles */
+.add-song-container button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add button */
+.add-song-container button:first-child {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.add-song-container button:first-child:hover {
+  background-color: #45a049;
+}
+
+/* Cancel button */
+.add-song-container button:last-child {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.add-song-container button:last-child:hover {
+  background-color: #d32f2f;
+}
+/* EditAlbumForm Container */
+.edit-album-form-container {
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 30px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  font-size: 0.9rem;
+  max-height: 80vh;  /* Giới hạn chiều cao tối đa */
+  overflow-y: auto;  /* Thêm thanh cuộn khi cần */
+}
+
+.edit-album-form-container h3 {
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Labels */
+.edit-album-form-container label {
+  font-size: 16px;
+  color: #555;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.edit-album-form-container input,
+.edit-album-form-container textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+.edit-album-form-container input:focus,
+.edit-album-form-container textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Textarea */
+.edit-album-form-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Song List */
+.edit-album-form-container__songs {
+  margin-bottom: 20px;
+}
+
+.edit-album-form-container__songs h4 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.song-item input {
+  width: 80%;
+  margin-right: 10px;
+}
+
+.delete-song-btn {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-song-btn:hover {
+  background-color: #e03e3e;
+}
+
+/* Button Add New Song */
+.add-song-btn {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.add-song-btn:hover {
+  background-color: #218838;
+}
+
+/* Form Buttons */
+.edit-album-form-container__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-album-form-container__buttons button {
+  width: 48%;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-album-form-container__buttons button:hover {
+  background-color: #0056b3;
+}
+
+.edit-album-form-container__buttons button[type="button"] {
+  background-color: #ff4d4f;
+}
+
+.edit-album-form-container__buttons button[type="button"]:hover {
+  background-color: #e03e3e;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+  .edit-album-form-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .edit-album-form-container__buttons button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .add-song-btn {
+    width: 100%;
+  }
+}

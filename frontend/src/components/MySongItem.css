@@ -1,0 +1,114 @@
+/* General styles for the song item */
+.song-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-item.deleted {
+  opacity: 0.6;
+  background-color: #f8d7da; /* Light red background for deleted songs */
+}
+
+.song-item__image-container {
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.song-item__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.song-item__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.song-item__artist {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.song-item__deleted-badge {
+  font-size: 0.9rem;
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.song-item__more-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.song-item__menu {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.song-item__menu button {
+  background-color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.song-item__menu button:hover {
+  background-color: #f1f1f1;
+}
+
+.song-item__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.song-item__overlay,
+.song-item__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Optional: Styles for the edit form */
+.song-item__overlay {
+  display: block;
+}
+

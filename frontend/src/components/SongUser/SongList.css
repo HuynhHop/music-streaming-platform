@@ -1,0 +1,71 @@
+.sl-song-list-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sl-logout-btn {
+    background-color: #f44336; /* Màu đỏ */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px; /* Khoảng cách với phần danh sách bài hát */
+  }
+  
+  .sl-logout-btn:hover {
+    background-color: #d32f2f; /* Màu đỏ đậm khi hover */
+  }
+  
+  .sl-song-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .sl-song-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 300px;
+    box-sizing: border-box;
+  }
+  
+  .sl-song-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .sl-song-title {
+    font-weight: bold;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+  
+  .sl-song-artist {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+  

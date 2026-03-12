@@ -1,0 +1,64 @@
+.edit-favorites-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-favorites-form h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .edit-favorites-form input,
+  .edit-favorites-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    resize: none;
+  }
+  
+  .edit-favorites-form textarea {
+    height: 100px;
+  }
+  
+  .edit-favorites-form button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .edit-favorites-form button:first-child {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .edit-favorites-form button:first-child:hover {
+    background-color: #218838;
+  }
+  
+  .edit-favorites-form button:last-child {
+    background-color: #ff6347;
+    color: white;
+  }
+  
+  .edit-favorites-form button:last-child:hover {
+    background-color: #e5533d;
+  }
+  

@@ -1,0 +1,111 @@
+/* Lớp overlay nền */
+.share-form-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Màu đen mờ hơn */
+  z-index: 9998; /* Đảm bảo overlay nằm dưới share form */
+  animation: fadeInOverlay 0.3s ease-in-out;
+}
+
+/* Hiệu ứng mờ nền */
+@keyframes fadeInOverlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Lớp ShareForm */
+.share-form {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Đổ bóng mềm mại */
+  z-index: 9999; /* Đảm bảo share form nằm trên overlay */
+  width: 350px; /* Điều chỉnh lại kích thước */
+  text-align: center;
+  animation: fadeInForm 0.5s ease-in-out; /* Hiệu ứng hiện form */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hiệu ứng hiện form */
+@keyframes fadeInForm {
+  0% {
+    transform: translate(-50%, -40%); /* Bắt đầu từ trên */
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%); /* Di chuyển về giữa */
+    opacity: 1;
+  }
+}
+
+.share-form h4 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.share-form .share-link-input {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease; /* Mềm mại khi focus */
+}
+
+.share-form .share-link-input:focus {
+  border-color: #007bff; /* Đổi màu khi focus */
+  outline: none;
+}
+
+.share-form button {
+  width: 50%;
+  padding: 12px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 5px;
+}
+
+.share-form button:hover {
+  background-color: #0056b3; /* Đổi màu khi hover */
+  transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ */
+}
+
+.share-form button:active {
+  background-color: #004080; /* Đổi màu khi nhấn */
+}
+
+.share-form button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Hiệu ứng khi focus */
+}
+
+.share-form button + button {
+  margin-top: 15px; /* Tăng khoảng cách giữa các nút */
+}
+
+.share-form button + button:hover {
+  transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+}

@@ -1,0 +1,80 @@
+/* SongDetailForm.css */
+
+.song-detail-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    max-height: 500px; /* Giới hạn chiều cao của form */
+    overflow-y: auto; /* Cho phép cuộn khi nội dung vượt quá chiều cao */
+  }
+  
+  .song-detail-form h4 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .song-detail-form form {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .form-group p, .form-group a {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .form-group img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .form-group a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .form-group a:hover {
+    text-decoration: underline;
+  }
+  
+  .form-group p {
+    word-wrap: break-word;
+  }
+  
+  .song-detail-form .form-group:last-child {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .song-detail-form .form-group:last-child p {
+    font-weight: bold;
+  }
+  
+  .song-detail-form .form-group:last-child p:first-child {
+    color: #f44336; /* For deleted status */
+  }
+  
+  .song-detail-form .form-group:last-child p:last-child {
+    color: #4caf50; /* For active status */
+  }
+  

@@ -1,0 +1,126 @@
+/* Đặt nền mờ cho modal */
+.queue-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Nội dung modal */
+.queue-modal-content {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  width: 340px;
+  max-height: 80vh; /* Giới hạn chiều cao modal */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.4s ease-out;
+  overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+}
+
+/* Hiệu ứng fade-in từ dưới lên */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Tiêu đề */
+.queue-modal-content h2 {
+  margin: 0;
+  font-size: 24px;
+  text-align: center;
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Danh sách các bài hát */
+.queue-modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.queue-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Thêm hiệu ứng chuyển background và zoom */
+}
+
+/* Hiệu ứng khi click vào item */
+.queue-item:hover {
+  background-color: #f0f0f0; /* Màu nền thay đổi khi hover */
+}
+
+.queue-item.selected {
+  background-color: #b92929; /* Màu nền khi item được chọn */
+  color: white; /* Chữ màu trắng khi chọn */
+  transform: scale(1.05); /* Phóng to một chút khi chọn */
+}
+
+/* Hiệu ứng cho các phần tử bên trong */
+.queue-item span {
+  cursor: pointer;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.queue-item.selected span {
+  color: white; /* Đổi màu chữ thành trắng khi chọn */
+}
+
+/* Nút đóng */
+.queue-modal-content .close-button {
+  
+  background-color: #2980b9; /* Màu vàng pastel */
+  color: 7f8c8d;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.queue-modal-content .close-button:hover {
+  background-color: #3498db;
+}
+
+/* Nút xóa với biểu tượng X */
+.remove-button {
+  background-color: transparent;
+  color: red;
+  border: none;
+  font-size: 20px; /* Kích thước biểu tượng X */
+  cursor: pointer;
+  padding: 0;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-button:hover {
+  color: darkred;
+}
+
+.remove-icon {
+  font-size: 22px; /* Kích thước biểu tượng X */
+  font-weight: bold;
+}

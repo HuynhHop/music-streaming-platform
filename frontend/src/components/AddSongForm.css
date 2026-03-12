@@ -1,0 +1,84 @@
+.add-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .add-form h3 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .add-form input,
+  .add-form textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background-color: #fff;
+  }
+  
+  .add-form input:focus,
+  .add-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .add-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .add-form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-form button.cancel {
+    background-color: #dc3545;
+  }
+  
+  .add-form button:hover {
+    background-color: #218838;
+  }
+  
+  .add-form button.cancel:hover {
+    background-color: #c82333;
+  }
+  
+  /* Specific Styles for Add Song Form */
+  .add-song-form .song-info {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .add-song-form .song-info input {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .add-song-form .song-info .textarea {
+    height: 100px;
+  }
+  
+  .add-song-form .song-info .song-type {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .add-song-form .song-info .song-type select {
+    width: 45%;
+  }

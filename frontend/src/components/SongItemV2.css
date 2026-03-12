@@ -1,0 +1,88 @@
+.song-item-v2 {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-item-v2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f7f7f7;
+}
+
+.song-item-v2 .song-content-v2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.song-item-v2 .song-image-v2 {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.song-item-v2:hover .song-image-v2 {
+  transform: scale(1.05);
+}
+
+.song-item-v2 .song-details-v2 {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.song-item-v2 .song-title-v2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.song-item-v2:hover .song-title-v2 {
+  color: #007bff;
+}
+
+.song-item-v2 .artist-name-v2 {
+  font-size: 1rem;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+.song-item-v2 .delete-button {
+  background-color: #ff4747;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.song-item-v2 .delete-button:hover {
+  background-color: #d73737;
+  opacity: 1;
+}
+
+.song-item-v2 .delete-button:focus {
+  outline: none;
+}
+
+.song-item-v2 .delete-button::before {
+  content: "🗑️";
+  margin-right: 8px;
+}

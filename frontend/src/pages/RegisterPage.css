@@ -1,0 +1,128 @@
+/* Reset margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Nền gradient nhẹ */
+.register-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #000000, #007bff); /* Nền gradient xanh dương và xanh ngọc */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Tiêu đề chính */
+.register-page-container h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #dfe6e9;
+    text-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-out;
+}
+
+/* Form container */
+.register-form {
+    width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form group styling */
+.register-form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Label styling */
+.register-form-group label {
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #dfe6e9;
+}
+
+/* Input và select styling */
+.register-form-group input,
+.register-form-group select {
+    width: 470px;
+    padding: 12px 15px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #ffffff;
+    color: #2d3436;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.register-form-group input:focus,
+.register-form-group select:focus {
+    outline: none;
+    transform: scale(1.02); /* Zoom nhẹ */
+    border: 1px solid #74b9ff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Nút đăng ký */
+.register-submit-btn {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background-color: #0984e3;
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.register-submit-btn:hover {
+    background-color: #74b9ff;
+    transform: translateY(-2px);
+}
+
+/* Thông báo lỗi */
+.register-error-message {
+    color: #ff7675;
+    font-size: 1em;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Liên kết bổ sung */
+.register-additional-links {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.register-additional-links a {
+    color: #dfe6e9;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.register-additional-links a:hover {
+    color: #ffffff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

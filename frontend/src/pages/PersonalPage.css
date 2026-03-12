@@ -1,0 +1,251 @@
+/* Container cho trang cá nhân */
+.personal-page {
+    padding: 20px;
+    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Tiêu đề trang */
+.personal-page h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+/* Các section riêng biệt (Songs, Albums, Playlists) */
+.personal-page__section {
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.personal-page__section h3 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.my-song-list-container,
+.my-album-list-container,
+.my-playlist-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Thiết kế và hiệu ứng cho các phần tử danh sách */
+.my-song-list-container .my-song-item,
+.my-album-list-container .my-album-item,
+.my-playlist-list-container .my-playlist-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.my-song-list-container .my-song-item:hover,
+.my-album-list-container .my-album-item:hover,
+.my-playlist-list-container .my-playlist-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.my-song-item img,
+.my-album-item img,
+.my-playlist-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.my-song-item img:hover,
+.my-album-item img:hover,
+.my-playlist-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Menu và các nút chức năng */
+.personal-page__menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.personal-page__menu button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.personal-page__menu button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.personal-page__menu button.active {
+    background-color: #0056b3;
+}
+
+/* Các form thêm mới */
+.add-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.add-form input,
+.add-form textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.add-form input:focus,
+.add-form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Các nút trong form */
+.add-form button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-form button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.add-form button.cancel {
+    background-color: #dc3545;
+}
+
+.add-form button.cancel:hover {
+    background-color: #c82333;
+}
+
+/* Pagination controls */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.pagination-controls button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-controls button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Hiệu ứng cho hình ảnh */
+.personal-page__section img {
+    transition: transform 0.3s ease;
+}
+
+.personal-page__section img:hover {
+    transform: scale(1.05);
+}
+
+/* Thêm hiệu ứng động cho phần menu */
+.personal-page__menu button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.personal-page__menu button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+.personal-page {
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.personal-page__section {
+    margin-bottom: 30px;
+}
+
+.personal-page__section .pagination-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination-controls button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+}
+
+.personal-page__section {
+    margin-bottom: 30px;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .section-header h3 {
+    margin: 0;
+  }
+  
+  .section-header button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .section-header button.active {
+    background-color: #0056b3;
+  }
+  
+
+.section-header{
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }

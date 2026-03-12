@@ -1,0 +1,191 @@
+/* General Styles */
+.artist-info {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.artist-info h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.artist-info h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Nút Add Artist */
+.add-artist-btn {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.add-artist-btn:hover {
+  background-color: #0056b3;
+}
+
+.add-artist-btn:focus {
+  outline: none;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.modal textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.validation-checkbox {
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn:focus {
+  outline: none;
+}
+
+/* Artist List */
+.artist-list {
+  margin-top: 20px;
+}
+
+.artist-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.artist-list th,
+.artist-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.artist-list th {
+  background-color: #f2f2f2;
+}
+
+.artist-list tr:hover {
+  background-color: #f9f9f9;
+}
+
+.artist-list button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.artist-list button:hover {
+  background-color: #0056b3;
+}
+
+.artist-list button:focus {
+  outline: none;
+}
+
+.search-input {
+  padding: 8px;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.filter-validation {
+  padding: 8px;
+  margin-right: 20px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-validation:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Nút Delete */
+.artist-list button.delete-btn {
+background-color: #dc3545; /* Màu đỏ */
+}
+
+.artist-list button.delete-btn:hover {
+background-color: #c82333; /* Màu đỏ đậm khi hover */
+}
+.scrollable-table-container {
+max-height: 400px; /* Đặt chiều cao tối đa cho phần chứa bảng */
+overflow-y: auto;  /* Cho phép cuộn dọc khi nội dung vượt quá */
+margin-bottom: 20px; /* Khoảng cách phía dưới */
+}

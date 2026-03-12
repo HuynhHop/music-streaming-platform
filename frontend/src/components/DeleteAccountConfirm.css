@@ -1,0 +1,83 @@
+/* Đảm bảo các class này chỉ áp dụng cho component DeleteAccountConfirm */
+
+.delete-account__confirm-delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.delete-account__confirm-delete.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete-account__confirm-delete-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+
+.delete-account__confirm-delete-content h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Button Delete (Xóa tài khoản) */
+.delete-account__delete-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #e74c3c; /* Màu đỏ cho nút xóa */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-account__delete-button:hover {
+  background-color: #c0392b; /* Đổi màu khi hover */
+  transform: scale(1.05);
+}
+
+/* Button Cancel (Hủy) */
+.delete-account__cancel-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #bdc3c7; /* Màu xám cho nút hủy */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-account__cancel-button:hover {
+  background-color: #95a5a6; /* Đổi màu khi hover */
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .delete-account__confirm-delete-content {
+    width: 90%;
+    padding: 15px 20px;
+  }
+}

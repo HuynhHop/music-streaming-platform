@@ -1,0 +1,378 @@
+.playlists-section {
+  padding: 20px;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+  position: relative;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlist-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.close-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #d32f2f;
+}
+
+.playlist-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.playlist-item h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.playlist-item p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.view-btn {
+  align-self: flex-start;
+  padding: 8px 12px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #16a085;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sl-logout-btn {
+  background-color: #f44336; /* Màu đỏ */
+  color: white;
+  padding: 5px 10px; /* Giảm padding để làm nút nhỏ lại */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Giảm font-size để nút nhỏ hơn */
+  margin-bottom: 20px; /* Khoảng cách với phần danh sách album */
+}
+
+.sl-logout-btn:hover {
+  background-color: #d32f2f; /* Màu đỏ đậm khi hover */
+}
+.sl-song-list-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sl-song-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.sl-song-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 300px;
+  box-sizing: border-box;
+}
+
+.sl-song-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.sl-song-title {
+  font-weight: bold;
+  margin-top: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.sl-song-artist {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+
+.albums-list {
+  margin-top: 20px;
+  padding: 20px; /* Tăng khoảng cách padding */
+  background-color: #f4f8ff; /* Màu nền nhẹ nhàng hơn */
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; /* Đảm bảo album xuống dòng nếu không đủ chỗ */
+  gap: 20px; /* Tăng khoảng cách giữa các album */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho container */
+}
+
+.album-card {
+  flex: 0 1 calc(22% - 20px); /* Chiếm khoảng 22% chiều rộng container */
+  max-width: calc(22% - 20px); /* Giới hạn chiều rộng */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px; /* Bo góc hơn để đẹp hơn */
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Thêm hiệu ứng hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho từng card */
+}
+
+.album-card:hover {
+  transform: translateY(-5px); /* Hiệu ứng nổi khi hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Tăng đổ bóng khi hover */
+}
+
+.album-img {
+  width: 100%; /* Chiều rộng bằng container */
+  height: 200px; /* Chiều cao lớn hơn để làm nổi bật ảnh */
+  object-fit: cover; /* Đảm bảo hình ảnh hiển thị đẹp */
+}
+
+.album-details {
+  padding: 15px; /* Tăng khoảng cách trong */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.album-details h4 {
+  margin: 0;
+  font-size: 20px; /* Tăng kích thước tiêu đề */
+  color: #2c3e50; /* Màu đậm hơn cho tiêu đề */
+}
+
+.album-details p {
+  margin: 10px 0;
+  color: #7f8c8d; /* Màu xám nhạt hơn */
+  font-size: 16px; /* Tăng kích thước chữ mô tả */
+}
+
+.album-details button {
+  align-self: flex-start;
+  padding: 10px 15px; /* Tăng kích thước nút */
+  background-color: #1abc9c; /* Màu xanh nhạt bắt mắt hơn */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.album-details button:hover {
+  background-color: #16a085; /* Màu xanh đậm hơn khi hover */
+}
+/* Container chiếm toàn bộ màn hình */
+.user-info {
+  width: 100%;
+  height: 100vh; /* Chiều cao chiếm toàn màn hình */
+  display: flex;
+  flex-direction: column; /* Chỉnh hướng dọc */
+  justify-content: flex-start; /* Đảm bảo các phần tử không bị đẩy lên trên */
+  align-items: center;
+  background: linear-gradient(to bottom right, #f0f4ff, #d6e4ff); /* Background chuyển màu */
+  padding: 20px;
+  animation: fadeIn 0.8s ease-in-out;
+  position: relative; /* Để hiển thị modal bên trong */
+  overflow-y: auto; /* Đảm bảo có thể scroll */
+}
+
+/* Card chính giữa */
+.user-card {
+  width: 70%; /* Tăng kích thước card */
+  max-width: 900px; /* Giới hạn chiều rộng tối đa */
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* User details */
+.user-info__details {
+  width: 60%;
+}
+
+.user-info__field {
+  margin-bottom: 20px;
+}
+
+.user-info__field label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.user-info__field span,
+.user-info__field p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Actions Section */
+.user-info__actions {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px; /* Tăng khoảng cách giữa các nút */
+}
+
+/* Icon buttons */
+.icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-button:hover {
+  transform: scale(1.2); /* Phóng to khi hover */
+  color: #007bff; /* Đổi màu */
+}
+
+.icon-button span {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Hộp thoại Followers (Modal) */
+.followers-list {
+  position: fixed;
+  top: 50%;
+  right: 20px; /* Hộp thoại xuất hiện bên phải */
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  width: 300px; /* Độ rộng của hộp thoại */
+  max-height: 80vh; /* Giới hạn chiều cao */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 10; /* Đảm bảo hộp thoại xuất hiện trên các thành phần khác */
+  transition: transform 0.3s ease; /* Hiệu ứng xuất hiện */
+}
+
+/* Tên tiêu đề của hộp thoại */
+.followers-list h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Mỗi follower trong danh sách */
+.follower-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.follower-item p {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+/* Nút đóng hộp thoại */
+.followers-list button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.followers-list button:hover {
+  background-color: #d32f2f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,24 @@
+.add-album-form .album-info {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .add-album-form .album-info input {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .add-album-form .album-info .textarea {
+    height: 100px;
+  }
+  
+  /* Specific Styles for Add Playlist Form */
+  .add-playlist-form .playlist-info {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .add-playlist-form .playlist-info input {
+    width: 100%;
+    max-width: 400px;
+  }

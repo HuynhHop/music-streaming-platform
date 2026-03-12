@@ -1,0 +1,88 @@
+.song-list-container .song-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Điều chỉnh cột tự động */
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #ecf0f1; /* Màu nền sáng và tinh tế */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.song-list-container .song-list:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Thêm hiệu ứng khi hover vào danh sách */
+}
+
+.song-list-container .song-list h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #34495e;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase; /* Viết hoa toàn bộ tiêu đề */
+  letter-spacing: 2px;
+  border-bottom: 2px solid #f39c12; /* Đặt đường gạch chân dưới tiêu đề */
+  padding-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.song-list-container .song-list:hover h2 {
+  color: #f39c12; /* Màu thay đổi khi hover vào tiêu đề */
+}
+
+.song-list-container .song-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Đổ bóng rõ rệt */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.song-list-container .song-item:hover {
+  transform: scale(1.05); /* Phóng to khi hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ đậm khi hover */
+}
+
+.song-list-container .song-item .song-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.song-list-container .song-item:hover .song-image {
+  transform: scale(1.1); /* Phóng to ảnh khi hover */
+}
+
+.song-list-container .song-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.song-list-container .song-item:hover .song-details {
+  opacity: 1;
+}
+
+.song-list-container .song-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7); /* Thêm hiệu ứng bóng cho tên bài hát */
+}
+
+.song-list-container .artist-name {
+  font-size: 16px;
+  color: #ecf0f1;
+  margin-top: 8px;
+  text-transform: capitalize;
+}

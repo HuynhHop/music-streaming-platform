@@ -1,0 +1,42 @@
+.song-item {
+  display: flex;
+  justify-content: center;  /* Căn giữa các phần tử ngang */
+  align-items: center;      /* Căn giữa các phần tử dọc */
+  width: 300px;             /* Kích thước cố định cho mỗi item */
+  height: 300px;            /* Thêm khoảng cách giữa các item */
+  cursor: pointer;
+  position: relative;
+}
+
+.song-item .song-content {
+  display: flex;
+  flex-direction: column;  /* Để các phần tử xếp chồng lên nhau */
+  justify-content: center;  /* Căn giữa các phần tử bên trong */
+  text-align: center;      /* Căn giữa nội dung trong song-details */
+}
+
+.song-item .song-image {
+  width: 100%;             /* Đảm bảo ảnh chiếm toàn bộ chiều rộng */
+  height: auto;            /* Tự động tính toán chiều cao dựa trên tỷ lệ ảnh */
+  max-width: 100%;         /* Giới hạn ảnh không vượt quá chiều rộng */
+  object-fit: cover;       /* Đảm bảo ảnh không bị méo, vẫn giữ tỷ lệ */
+}
+
+.song-item .song-details {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);  
+  font-size: 14px;
+}
+
+.song-item .song-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.song-item .artist-name {
+  font-size: 12px;
+}
