@@ -177,8 +177,8 @@ const SongManagement = () => {
             {sortedSongs.map((song) => (
               <tr key={song.id}>
                 <td>{song.title}</td>
-                <td>{song.creator.fullname}</td>
-                <td>{song.artist.fullName}</td>
+                <td>{song.creator?.fullname || "Unknown Creator"}</td>
+                <td>{song.artist?.fullName || "Unknown Artist"}</td>
                 <td>{song.type}</td>
                 <td>{song.totalPlays}</td>
                 <td>

@@ -89,7 +89,7 @@ const SystemStats = () => {
                 {songs.map((song, index) => (
                   <tr key={index}>
                     <td>{song.title}</td>
-                    <td>{song.artist?.name || "Unknown"}</td>
+                    <td>{song.artist?.fullName || "Unknown"}</td>
                     <td>{song.totalPlays}</td>
                     <td>{format(new Date(song.createdAt), "yyyy-MM-dd")}</td>
                   </tr>

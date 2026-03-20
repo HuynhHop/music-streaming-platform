@@ -35,6 +35,8 @@ router.delete("/:id", verifyAccessToken, userController.forceDelete);
 
 router.patch("/:id/restore", userController.restore);
 
+router.post("/heartbeat", verifyAccessToken, userController.heartbeat);
+
 // API Role
 router.get("/role/:id", roleController.getById);
 router.get("/role/", roleController.getAll);

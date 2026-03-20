@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import Header from './components/Header';
@@ -27,6 +27,49 @@ const ETypeRole = require("./enums/ETypeRole");
 function App() {
   const { authState } = React.useContext(AuthContext);
   const { isAuthenticated, role } = authState;
+  const lastActiveRef = useRef(Date.now());
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const token = localStorage.getItem("accessToken");
+    if (!token) return;
+
+    // 🎯 detect activity
+    const updateActivity = () => {
+      lastActiveRef.current = Date.now();
+    };
+
+    window.addEventListener("mousemove", updateActivity);
+    window.addEventListener("keydown", updateActivity);
+    window.addEventListener("click", updateActivity);
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+
+      // ❌ không hoạt động 60s → bỏ
+      if (now - lastActiveRef.current > 60000) return;
+
+      // ❌ tab không active → bỏ
+      if (document.visibilityState !== "visible") return;
+
+      fetch("http://localhost:5000/api/users/heartbeat", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).catch((err) => console.error("Heartbeat error:", err));
+
+      console.log("🔥 Heartbeat sent");
+    }, 30000);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("mousemove", updateActivity);
+      window.removeEventListener("keydown", updateActivity);
+      window.removeEventListener("click", updateActivity);
+    };
+  }, [isAuthenticated]);
 
   console.log('Auth:', isAuthenticated, 'Role:', role);
 

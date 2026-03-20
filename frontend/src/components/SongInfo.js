@@ -644,15 +644,15 @@ const SongInfo = ({ onLikeClick }) => {
             {/* Thông tin bài hát bên trái */}
             <div className="song-info-left">
               <div className="song-info-image-container">
-                {imageSrc ? (
-                  <img
-                    src={imageSrc}
-                    alt={song.title}
-                    className="song-info-image"
-                  />
-                ) : (
-                  <div className="song-info-placeholder">Ảnh không có sẵn</div>
-                )}
+                <img
+                  src={imageSrc || song.linkImg || "/default-song-image.jpg"}
+                  alt={song.title}
+                  className="song-info-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/default-song-image.jpg";
+                  }}
+                />
               </div>
               <div className="song-info-details">
                 <h1 className="song-info-title">

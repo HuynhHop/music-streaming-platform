@@ -39,7 +39,7 @@ const SongItem = ({ song, onSongClick }) => {
     <div className="song-item" onClick={() => onSongClick(song)}>
       <div className="song-content">
         <img
-          src={imageSrc}
+          src={imageSrc || song.linkImg || "/default-song-image.jpg"} // Sử dụng ảnh đã tải hoặc fallback
           alt={song.title}
           className="song-image"
         />

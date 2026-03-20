@@ -688,6 +688,54 @@ class UserController {
     }
   }
   
+  async heartbeat (req, res) {
+    try {
+      const { _id: userId } = req.user;
+      const user = await User.findById(userId);
+
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      // init nếu thiếu
+      if (!user.streak) {
+        user.streak = { current: 0, longest: 0, lastListenDate: null };
+      }
+      if (!user.rank) user.rank = "Dong";
+      if (!user.activeTimeToday) user.activeTimeToday = 0;
+
+      const today = new Date().toDateString();
+      const lastDate = user.streak.lastListenDate
+        ? new Date(user.streak.lastListenDate).toDateString()
+        : null;
+
+      // chỉ reset khi sang ngày mới
+      if (lastDate && lastDate !== today) {
+        user.activeTimeToday = 0;
+      }
+
+      // cộng thời gian
+      user.activeTimeToday += 30;
+
+      // check đủ điều kiện
+      if (user.activeTimeToday >= 900 && lastDate !== today) {
+        user.streak.current += 1;
+        user.streak.longest = Math.max(user.streak.longest, user.streak.current);
+        user.streak.lastListenDate = new Date();
+
+        if (user.streak.current >= 7) user.rank = "Vang";
+        else if (user.streak.current >= 3) user.rank = "Bac";
+      }
+
+      await user.save();
+
+      res.json({
+        activeTimeToday: user.activeTimeToday,
+        streak: user.streak,
+        rank: user.rank,
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new UserController();

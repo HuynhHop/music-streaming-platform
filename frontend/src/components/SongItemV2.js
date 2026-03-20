@@ -50,15 +50,15 @@ const SongItemV2 = ({ song, onSongClick, onDelete, enableDelete}) => {
     <div className="song-item-v2" onClick={() => onSongClick(song)}>
       <div className="song-content-v2">
         <img
-          src={imageSrc}
+          src={imageSrc || song.linkImg || "/default-song-image.jpg"}
           alt={song.title}
           className="song-image-v2"
         />
         <div className="song-details-v2">
           <h4 className="song-title-v2">{song.title}</h4>
-          <p className="artist-name-v2">
+          {/* <p className="artist-name-v2">
             {artist ? artist.fullName : 'N/A'}
-          </p>
+          </p> */}
         </div>
         { enableDelete? (
         <button className="delete-button" onClick={(e) => { 

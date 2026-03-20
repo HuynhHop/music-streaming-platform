@@ -2,7 +2,7 @@ const ETypeNotify = require('../../shared/enums/ETypeNotify');
 const Notify = require('../models/Notify');
 const Song = require('../models/Song');
 const Album = require('../models/Album');
-const PlayList = require('../models/PlayList');
+const PlayList = require('../models/Playlist');
 const User = require('../models/User');
 
 const createNotify = async (req, res) => {  

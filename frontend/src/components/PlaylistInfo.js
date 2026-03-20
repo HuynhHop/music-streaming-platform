@@ -107,7 +107,7 @@ const PlaylistPage = () => {
             <div className="playlist-container">
                 <div className="playlist-info">
                     <h1>{playlist.title}</h1>
-                    <p><strong>Creator:</strong> {playlist.creator.fullname}</p>
+                    <p><strong>Creator:</strong> {playlist.creator?.fullname}</p>
                     <p><strong>Description:</strong> {playlist.desc}</p>
                     <p><strong>Created At:</strong> {new Date(playlist.createAt).toLocaleString()}</p>
                     

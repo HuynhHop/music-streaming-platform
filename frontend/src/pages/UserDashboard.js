@@ -87,6 +87,9 @@ const UserDashboard = () => {
 
   return (
     <div className="page">
+      <div className="streak-floating">
+        🔥 {authState.user?.streak?.current || 0} | 🏆 {authState.user?.rank || "Dong"}
+      </div>
       <Suspense fallback={<div>Đang tải...</div>}>
         <div ref={imageSliderRef} className={`fade-in ${imageSliderInView ? 'visible' : ''}`}>
           {imageSliderInView && <ImageSlider />}

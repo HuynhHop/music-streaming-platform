@@ -14,4 +14,15 @@ h2 {
   margin-bottom: 20px;
 }
 
+.streak-floating {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #111;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  z-index: 999;
+}
+
 /* You can also customize your other components' animations here */

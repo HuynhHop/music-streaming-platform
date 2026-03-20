@@ -6,9 +6,10 @@ import './RankingTable.css';
 const RankingTable = ({ topTotalPlays }) => {
   const navigate = useNavigate();
   const sortedRanking = Array.isArray(topTotalPlays)
-    ? [...topTotalPlays].sort((a, b) => b.totalPlaysThisWeek - a.totalPlaysThisWeek).slice(0, 10) // Lấy top 10
-    : [];
-
+  ? [...topTotalPlays]
+      .sort((a, b) => b.totalPlays - a.totalPlays)
+      .slice(0, 10)
+  : [];
   const handleClick = (song) => {
     navigate(`/song/${song._id}`, { state: { song } });
   };
@@ -46,8 +47,8 @@ const RankingTable = ({ topTotalPlays }) => {
                 )}
               </td>
               <td>{song.title}</td>
-              <td>{song.artist.fullName}</td>
-              <td>{song.creator.fullname}</td>
+              <td>{song.artist?.fullName || 'Unknown Artist'}</td>
+              <td>{song.creator?.fullname || 'Unknown Creator'}</td>
               <td>{song.totalPlays}</td>
             </tr>
           ))}

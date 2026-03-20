@@ -1,4 +1,4 @@
-const Playlist = require("../models/PlayList");
+const Playlist = require("../models/Playlist");
 const Song = require("../models/Song"); // Import model Song
 
 const createPlaylist = async (req, res) => {

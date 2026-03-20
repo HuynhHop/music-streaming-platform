@@ -180,7 +180,7 @@ const SearchPage = () => {
                 onClick={() => handleSongClick(song)}
               >
                 <img
-                  src={imageMap[song._id] || 'default-image.jpg'}
+                  src={imageMap[song._id] || song.linkImg || "/default-song-image.jpg"} // Sử dụng ảnh đã lưu trong imageMap hoặc fallback
                   alt={song.title}
                   className="sp-result-img"
                 />

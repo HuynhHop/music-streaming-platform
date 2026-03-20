@@ -39,6 +39,17 @@ const userSchema = new Schema(
     gender: { type: String, maxLength: 255, required: true, default: "Man" },
     birthday: { type: Date, require: true},
     desc: { type: String, maxLength: 255, required: true },
+    streak: {
+      current: { type: Number, default: 0 },
+      longest: { type: Number, default: 0 },
+      lastListenDate: { type: Date }
+    },
+    rank: {
+      type: String,
+      enum: ["Dong", "Bac", "Vang"],
+      default: "Dong"
+    },
+    activeTimeToday: { type: Number, default: 0 },
     role: { type: Number, enum: [ETypeRole.ADMIN, ETypeRole.USER], required: true, default: ETypeRole.USER },
     isBlocked: { type: Boolean, default: false },
     passwordChangedAt: { type: String },
