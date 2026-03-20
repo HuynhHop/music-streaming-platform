@@ -13,7 +13,7 @@ interact with other users, manage playlist,....
 - 🛠 Admin dashboard for managing songs, artists, and reports
 
 ## 📸 Screenshots
-![Home](image/image1.png)
+![Home](image/abz.png)
 ![Home](image/image2.png)
 ![Home](image/image3.png)
 ![Home](image/image4.png)
