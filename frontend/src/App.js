@@ -53,7 +53,7 @@ function App() {
       // ❌ tab không active → bỏ
       if (document.visibilityState !== "visible") return;
 
-      fetch("http://localhost:5000/api/users/heartbeat", {
+      fetch("http://127.0.0.1:5000/api/users/heartbeat", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

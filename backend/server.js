@@ -10,9 +10,9 @@ require('dotenv').config({ path: '../.env' });
 
 const songRoutes = require('./routes/songRoute');
 const artistRoutes = require('./routes/artistRoute');
-const notifyRoutes = require("./routes/NotifyRoute.js");
-const reportRoutes = require("./routes/ReportRoute.js");
-const commentRoutes = require("./routes/CommentRoute.js");
+const notifyRoutes = require("./routes/notifyRoute.js");
+const reportRoutes = require("./routes/reportRoute.js");
+const commentRoutes = require("./routes/commentRoute.js");
 const userRoutes = require('./routes/userRoute');
 const followRoutes = require('./routes/followRoute');
 const albumRoutes = require('./routes/albumRoute');
@@ -74,6 +74,6 @@ conn.once('open', function () {
 initSocket(io);
 
 // Khởi động server
-server.listen(process.env.PORT || 5000, () => {
+server.listen(5000, "127.0.0.1", () => {
   console.log(`Server is running on port: ${process.env.PORT || 5000}`);
 });

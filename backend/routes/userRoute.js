@@ -8,6 +8,7 @@ const { verifyAccessToken, isAdmin } = require("../services/jwt");
 const router = express.Router();
 
 // API User
+router.post("/login", userController.login);
 router.get("/name/:fullname", verifyAccessToken, userController.getUserByName);
 router.get("/getUserToken", verifyAccessToken, userController.getUserFromToken);
 router.get("/forgotPassword", userController.forgotPassword);
@@ -19,7 +20,7 @@ router.get("/", [verifyAccessToken, isAdmin], userController.getAll);
 
 router.post("/current", verifyAccessToken, userController.current);
 router.post("/register", userController.register);
-router.post("/login", userController.login);
+
 
 router.put("/refreshAccessToken", userController.refreshAccessToken);
 router.put("/resetPassword",verifyAccessToken, userController.resetPassword);

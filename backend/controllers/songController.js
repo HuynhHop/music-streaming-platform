@@ -1,6 +1,9 @@
 const Song = require('../models/Song');
+const History = require('../models/History');
 const mongoose = require('mongoose');
 const Grid = require("gridfs-stream");
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 
 let gfsAudios, gfsPhotos;
 const conn = mongoose.connection;
@@ -13,175 +16,255 @@ conn.once('open', function () {
   gfsPhotos.collection("photos");
 });
 
-exports.getSongs = async (req, res) => {
-  try {
-    const songs = await Song.find({ isDeleted: false }).populate(
-      "artist creator"
-    );
-    res.status(200).json(songs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+class SongController {
+  // [POST] /songs/upload
+  uploadSong = catchAsync(async (req, res) => {
+    if (!req.files || !req.files.fileMP3 || !req.files.filePhoto) {
+      throw new AppError("You must upload both audio and photo files", 400);
+    }
 
-exports.getSongById = async (req, res) => {
-  try {
+    const songUrl = `http://localhost:5000/api/songs/fileMP3/${req.files.fileMP3[0].filename}`;
+    const imgUrl = `http://localhost:5000/api/songs/filePhoto/${req.files.filePhoto[0].filename}`;
+
+    const newSong = new Song({
+      title: req.body.title,
+      type: req.body.type,
+      artist: req.body.artist || null,
+      desc: req.body.desc,
+      lyrics: req.body.lyrics,
+      creator: req.body.creator,
+      linkImg: imgUrl,
+      linkSong: songUrl
+    });
+
+    await newSong.save();
+    const populatedSong = await Song.findById(newSong._id)
+      .populate('artist')
+      .populate('creator', 'fullname email username');
+
+    res.status(201).json(populatedSong);
+  });
+
+  // [GET] /songs
+  getSongs = catchAsync(async (req, res) => {
+    const songs = await Song.find({ isDeleted: false })
+      .populate("artist")
+      .populate("creator", "fullname email username");
+
+    if (songs.length === 0) {
+      throw new AppError("No songs found", 404);
+    }
+
+    res.status(200).json(songs);
+  });
+
+  // [GET] /songs/:id
+  getSongById = catchAsync(async (req, res) => {
     const { id } = req.params;
-    const song = await Song.findById(id).populate("artist creator");
+
+    const song = await Song.findById(id)
+      .populate('artist')
+      .populate('creator', 'fullname email username');
 
     if (!song || song.isDeleted) {
-      return res
-        .status(404)
-        .json({ message: "Bài hát không tồn tại hoặc đã bị xóa." });
+      throw new AppError("Song not found or has been deleted", 404);
+    }
+
+    // Track listening history
+    if (req.user?._id) {
+      setImmediate(async () => {
+        try {
+          const recentHistory = await History.findOne({
+            user: req.user._id,
+            song: song._id,
+            listenedAt: { $gte: new Date(Date.now() - 5 * 60 * 1000) }
+          });
+
+          if (!recentHistory) {
+            await History.create({
+              user: req.user._id,
+              song: song._id,
+              listenedAt: new Date(),
+              completed: true
+            });
+
+            await Song.findByIdAndUpdate(song._id, { $inc: { listenCount: 1 } });
+          }
+        } catch (error) {
+          console.error('Error tracking:', error);
+        }
+      });
     }
 
     res.status(200).json(song);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  });
 
-exports.updateSong = async (req, res) => {
-  try {
-    const song = await Song.findById(req.params.id);
+  // [PUT] /songs/:id
+  updateSong = catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    const song = await Song.findById(id);
     if (!song || song.isDeleted) {
-      return res.status(404).json({ message: "Bài hát không tồn tại." });
+      throw new AppError("Song not found", 404);
     }
 
     Object.assign(song, req.body, { updatedAt: new Date() });
     await song.save();
 
-    res.status(200).json(song);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    const updatedSong = await Song.findById(id)
+      .populate('artist')
+      .populate('creator', 'fullname email username');
 
-exports.loadFileMP3 = async (req, res) => {
-    try {
-        const file = await gfsAudios.files.findOne({ filename: req.params.filename });
-        const readStream = gfsAudios.createReadStream(file.filename);
-        readStream.pipe(res);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+    res.status(200).json(updatedSong);
+  });
 
-exports.deleteFileMP3 = async (req, res) => {
-    try {
-        await gfsAudios.files.deleteOne({ filename: req.params.filename });
-        res.send("success");
-    } catch (error) {
-        console.log(error);
-        res.send("An error occured.");
-    }
-};
-exports.loadFilePhoto = async (req, res) => {
-    try {
-        const file = await gfsPhotos.files.findOne({ filename: req.params.filename });
-        const readStream = gfsPhotos.createReadStream(file.filename);
-        readStream.pipe(res);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+  // [GET] /songs/fileMP3/:filename
+  loadFileMP3 = catchAsync(async (req, res) => {
+    const { filename } = req.params;
 
-exports.deleteFilePhoto = async (req, res) => {
-    try {
-        await gfsPhotos.files.deleteOne({ filename: req.params.filename });
-        res.send("success");
-    } catch (error) {
-        console.log(error);
-        res.send("An error occured.");
+    const file = await gfsAudios.files.findOne({ filename });
+    if (!file) {
+      throw new AppError("Audio file not found", 404);
     }
-};
 
-exports.softDeleteSong = async (req, res) => {
-  try {
-    const song = await Song.findById(req.params.id);
-    if (!song || song.isDeleted) {
-      return res.status(404).json({ message: "Bài hát không tồn tại." });
+    const readStream = gfsAudios.createReadStream(file.filename);
+    readStream.pipe(res);
+  });
+
+  // [DELETE] /songs/fileMP3/:filename
+  deleteFileMP3 = catchAsync(async (req, res) => {
+    const { filename } = req.params;
+
+    const result = await gfsAudios.files.deleteOne({ filename });
+    if (result.deletedCount === 0) {
+      throw new AppError("Audio file not found", 404);
+    }
+
+    res.status(200).json({ success: true, message: "Audio file deleted successfully" });
+  });
+
+  // [GET] /songs/filePhoto/:filename
+  loadFilePhoto = catchAsync(async (req, res) => {
+    const { filename } = req.params;
+
+    const file = await gfsPhotos.files.findOne({ filename });
+    if (!file) {
+      throw new AppError("Photo file not found", 404);
+    }
+
+    const readStream = gfsPhotos.createReadStream(file.filename);
+    readStream.pipe(res);
+  });
+
+  // [DELETE] /songs/filePhoto/:filename
+  deleteFilePhoto = catchAsync(async (req, res) => {
+    const { filename } = req.params;
+
+    const result = await gfsPhotos.files.deleteOne({ filename });
+    if (result.deletedCount === 0) {
+      throw new AppError("Photo file not found", 404);
+    }
+
+    res.status(200).json({ success: true, message: "Photo file deleted successfully" });
+  });
+
+  // [PATCH] /songs/:id/soft-delete
+  softDeleteSong = catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    const song = await Song.findById(id);
+    if (!song) {
+      throw new AppError("Song not found", 404);
+    }
+
+    if (song.isDeleted) {
+      throw new AppError("Song is already deleted", 400);
     }
 
     song.isDeleted = true;
     await song.save();
 
-    res.status(200).json({ message: "Đã xóa bài hát." });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    res.status(200).json({ success: true, message: "Song deleted successfully" });
+  });
 
-exports.restoreSong = async (req, res) => {
-  try {
-    const song = await Song.findById(req.params.id);
-    if (!song || !song.isDeleted) {
-      return res
-        .status(404)
-        .json({ message: "Bài hát không tồn tại hoặc không cần khôi phục." });
+  // [PATCH] /songs/:id/restore
+  restoreSong = catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    const song = await Song.findById(id);
+    if (!song) {
+      throw new AppError("Song not found", 404);
+    }
+
+    if (!song.isDeleted) {
+      throw new AppError("Song is not deleted", 400);
     }
 
     song.isDeleted = false;
     await song.save();
 
-    res.status(200).json({ message: "Đã khôi phục bài hát." });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    res.status(200).json({ success: true, message: "Song restored successfully" });
+  });
 
-exports.hardDeleteSong = async (req, res) => {
-  try {
-    const song = await Song.findById(req.params.id);
+  // [DELETE] /songs/:id/hard
+  hardDeleteSong = catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    const song = await Song.findById(id);
     if (!song) {
-      return res.status(404).json({ message: "Bài hát không tồn tại." });
+      throw new AppError("Song not found", 404);
     }
 
-    await Song.findByIdAndDelete(req.params.id);
+    await Song.findByIdAndDelete(id);
 
-    res.status(200).json({ message: "Đã xóa hoàn toàn bài hát." });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    res.status(200).json({ success: true, message: "Song permanently deleted" });
+  });
 
-exports.getSongByType = async (req, res) => {
-  try {
+  // [GET] /songs/type/:type
+  getSongByType = catchAsync(async (req, res) => {
     const { type } = req.params;
-    const songs = await Song.find({ type, isDeleted: false }).populate(
-      "artist creator comments"
-    );
-    res.status(200).json(songs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
-exports.getSongByName = async (req, res) => {
-  try {
+    const songs = await Song.find({ type, isDeleted: false })
+      .populate("artist")
+      .populate("creator", "fullname email username");
+
+    if (songs.length === 0) {
+      throw new AppError(`No songs found with type: ${type}`, 404);
+    }
+
+    res.status(200).json(songs);
+  });
+
+  // [GET] /songs/title/:title
+  getSongByName = catchAsync(async (req, res) => {
     const { title } = req.params;
+    const regex = new RegExp(title, "i");
 
-    // Tạo regex để tìm kiếm tiêu đề khớp một phần (không phân biệt hoa thường)
-    const regex = new RegExp(title, "i"); // "i" để tìm kiếm không phân biệt hoa thường
+    const songs = await Song.find({ title: regex, isDeleted: false })
+      .populate("artist")
+      .populate("creator", "fullname email username");
 
-    const songs = await Song.find({ title: regex, isDeleted: false }).populate(
-      "artist creator comments"
-    );
+    if (songs.length === 0) {
+      throw new AppError(`No songs found with title: ${title}`, 404);
+    }
 
     res.status(200).json(songs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  });
 
-exports.getSongByCreator = async (req, res) => {
-  try {
+  // [GET] /songs/creator/:creator
+  getSongByCreator = catchAsync(async (req, res) => {
     const { creator } = req.params;
-    const songs = await Song.find({ creator, isDeleted: false }).populate(
-      "artist creator comments"
-    );
+
+    const songs = await Song.find({ creator, isDeleted: false })
+      .populate("artist")
+      .populate("creator", "fullname email username");
+
+    if (songs.length === 0) {
+      throw new AppError(`No songs found for creator: ${creator}`, 404);
+    }
+
     res.status(200).json(songs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  });
+}
+
+module.exports = new SongController();

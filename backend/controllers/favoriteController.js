@@ -1,271 +1,268 @@
 const Favorite = require('../models/Favorite');
-const Song = require('../models/Song'); // Import Song model
-const User = require('../models/User'); // Import Song model
+const Song = require('../models/Song');
+const User = require('../models/User');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 
 // Create a new favorite
-const createFavorite = async (req, res) => {
-    try {
-        const { title, songs, creator } = req.body;
-        const newFavorite = new Favorite({
-            title,
-            songs,
-            creator,
-            isDeleted: false,
-            createAt: Date.now(),
-        });
+const createFavorite = catchAsync(async (req, res) => {
+  const { title, songs, creator } = req.body;
 
-        const savedFavorite = await newFavorite.save();
-        res.status(201).json(savedFavorite);
-    } catch (error) {
-        return res.status(500).json({ msg: error.message });
-    }
-};
+  if (!title || !creator) {
+    throw new AppError("Missing required fields: title and creator", 400);
+  }
+
+  const newFavorite = new Favorite({
+    title,
+    songs: songs || [],
+    creator,
+    isDeleted: false,
+    createAt: Date.now(),
+  });
+
+  const savedFavorite = await newFavorite.save();
+  const populatedFavorite = await Favorite.findById(savedFavorite._id)
+    .populate('songs')
+    .populate('creator', 'fullname email username');
+
+  res.status(201).json(populatedFavorite);
+});
 
 // Get all favorites
-const getFavorites = async (req, res) => {
-    try {
-        const favorites = await Favorite.find({ isDeleted: false }).populate('songs').populate('creator');
-        res.status(200).json(favorites);
-    } catch (error) {
-        res.status(500).json({ error: 'Error retrieving favorites' });
-    }
-};
+const getFavorites = catchAsync(async (req, res) => {
+  const favorites = await Favorite.find({ isDeleted: false })
+    .populate('songs')
+    .populate('creator', 'fullname email username');
+
+  if (favorites.length === 0) {
+    throw new AppError("No favorites found", 404);
+  }
+
+  res.status(200).json(favorites);
+});
 
 // Get a single favorite by ID
-const getFavorite = async (req, res) => {
-    try {
-        const favorite = await Favorite.find({ _id: req.params._id });
-        if (!favorite || favorite.isDeleted) {
-            return res.status(404).json({ error: 'Favorite not found' });
-        }
+const getFavorite = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
-        res.status(200).json(favorite);
-    } catch (error) {
-        res.status(500).json({ error: 'Error retrieving favorite' });
-    }
-};
+  const favorite = await Favorite.findOne({ _id: id, isDeleted: false })
+    .populate('songs')
+    .populate('creator', 'fullname email username');
+
+  if (!favorite) {
+    throw new AppError("Favorite not found", 404);
+  }
+
+  res.status(200).json(favorite);
+});
 
 // Update a favorite
-const updateFavorite = async (req, res) => {
-    try {
-        const { title, songs } = req.body;
+const updateFavorite = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const { title, songs } = req.body;
 
-        const updatedFavorite = await Favorite.findByIdAndUpdate(
-            { _id: req.params._id },
-            { title: title, songs: songs },
-            { new: true }
-        );
+  if (!title && !songs) {
+    throw new AppError("At least one field is required to update", 400);
+  }
 
-        if (!updatedFavorite) {
-            return res.status(404).json({ error: 'Favorite not found' });
-        }
+  const updateData = {};
+  if (title) updateData.title = title;
+  if (songs) updateData.songs = songs;
 
-        res.status(200).json(updatedFavorite);
-    } catch (error) {
-        res.status(500).json({ error: 'Error updating favorite' });
-    }
-};
+  const updatedFavorite = await Favorite.findByIdAndUpdate(
+    id,
+    updateData,
+    { new: true, runValidators: true }
+  ).populate('songs')
+    .populate('creator', 'fullname email username');
+
+  if (!updatedFavorite) {
+    throw new AppError("Favorite not found", 404);
+  }
+
+  res.status(200).json(updatedFavorite);
+});
 
 // Delete a favorite (soft delete)
-const deleteFavorite = async (req, res) => {
-    try {
-        const deletedFavorite = await Favorite.findByIdAndUpdate(
-            { _id: req.params._id },
-            { isDeleted: true },
-            { new: true }
-        );
+const deleteFavorite = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
-        if (!deletedFavorite) {
-            return res.status(404).json({ error: 'Favorite not found' });
-        }
+  const deletedFavorite = await Favorite.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true }
+  );
 
-        res.status(200).json({ message: 'Favorite deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ error: 'Error deleting favorite' });
-    }
-};
+  if (!deletedFavorite) {
+    throw new AppError("Favorite not found", 404);
+  }
 
-const getFavoriteByCreator = async (req, res) => {
-    try {
-        const { creatorId } = req.params;
+  res.status(200).json({ message: "Favorite deleted successfully" });
+});
 
-        // Kiểm tra xem creator có tồn tại không
-        const creator = await User.findById(creatorId);
-        if (!creator) {
-            return res.status(404).json({ error: 'Creator not found' });
-        }
+// Get favorites by creator
+const getFavoriteByCreator = catchAsync(async (req, res) => {
+  const { creatorId } = req.params;
 
-        // Tìm kiếm favorites của creator
-        let favorites = await Favorite.find({
-            creator: creatorId,
-            isDeleted: false
-        }).populate('songs').populate('creator');
+  const creator = await User.findById(creatorId);
+  if (!creator) {
+    throw new AppError("Creator not found", 404);
+  }
 
-        // Nếu chưa có favorites nào, tạo một favorite mặc định
-        if (!favorites || favorites.length === 0) {
-            const defaultFavorite = new Favorite({
-                title: 'Favorites Playlist', // Tiêu đề mặc định
-                creator: creatorId,
-                songs: [], // Không có bài hát nào
-                isDeleted: false,
-                createAt: Date.now(),
-            });
+  let favorites = await Favorite.find({
+    creator: creatorId,
+    isDeleted: false
+  }).populate('songs').populate('creator', 'fullname email username');
 
-            // Lưu favorite mặc định vào cơ sở dữ liệu
-            const savedFavorite = await defaultFavorite.save();
+  if (!favorites || favorites.length === 0) {
+    const defaultFavorite = new Favorite({
+      title: 'Favorites Playlist',
+      creator: creatorId,
+      songs: [],
+      isDeleted: false,
+      createAt: Date.now(),
+    });
 
-            // Thêm favorite mặc định vào danh sách favorites
-            favorites = [savedFavorite];
-        }
+    const savedFavorite = await defaultFavorite.save();
+    favorites = [await Favorite.findById(savedFavorite._id)
+      .populate('songs')
+      .populate('creator', 'fullname email username')];
+  }
 
-        // Trả về danh sách favorites
-        res.status(200).json(favorites);
-    } catch (error) {
-        console.error('Error retrieving or creating favorites:', error.message);
-        res.status(500).json({
-            error: 'Internal server error',
-            details: error.message,
-        });
-    }
-};
+  res.status(200).json(favorites);
+});
 
 // Add a song to a favorite
-const addSongToFavorite = async (req, res) => {
-    try {
-        const { favoriteId } = req.params; // Favorite ID from route
-        const { songTitle } = req.body; // Song title from request body
+const addSongToFavorite = catchAsync(async (req, res) => {
+  const { favoriteId } = req.params;
+  const { songTitle, songId } = req.body;
 
-        console.log("Favorite ID:", favoriteId);
-        console.log("Song Title:", songTitle);
+  if (!songTitle && !songId) {
+    throw new AppError("Either songTitle or songId is required", 400);
+  }
 
-        // Find the song by title and ensure it's not deleted
-        const song = await Song.findOne({ title: songTitle, isDeleted: false });
-        console.log("Song found:", song);
+  let song;
+  if (songId) {
+    song = await Song.findOne({ _id: songId, isDeleted: false });
+  } else {
+    song = await Song.findOne({ title: songTitle, isDeleted: false });
+  }
 
-        if (!song) {
-            return res.status(404).json({ error: `Song with title "${songTitle}" not found` });
-        }
+  if (!song) {
+    throw new AppError(`Song "${songTitle || songId}" not found`, 404);
+  }
 
-        // Find the favorite by ID and ensure it's not deleted
-        const favorite = await Favorite.findOne({ _id: favoriteId, isDeleted: false });
-        console.log("Favorite found:", favorite);
+  const favorite = await Favorite.findOne({ _id: favoriteId, isDeleted: false });
+  if (!favorite) {
+    throw new AppError("Favorite not found or already deleted", 404);
+  }
 
-        if (!favorite) {
-            return res.status(404).json({ error: "Favorite not found or already deleted" });
-        }
+  if (favorite.songs.includes(song._id)) {
+    throw new AppError("Song already exists in the favorite", 400);
+  }
 
-        // Check if the song is already in the favorite
-        if (favorite.songs.includes(song._id)) {
-            return res.status(400).json({ error: "Song already exists in the favorite" });
-        }
+  favorite.songs.push(song._id);
+  await favorite.save();
 
-        // Add the song ID to the favorite's songs array
-        favorite.songs.push(song._id);
-        await favorite.save();
+  const updatedFavorite = await Favorite.findById(favoriteId)
+    .populate("songs")
+    .populate("creator", "fullname email username");
 
-        // Populate songs for response
-        const updatedFavorite = await Favorite.findById(favoriteId).populate("songs");
-
-        res.status(200).json({
-            message: "Song added successfully to the favorite",
-            favorite: updatedFavorite,
-        });
-    } catch (error) {
-        console.error("Error adding song to favorite:", error.message);
-        res.status(500).json({
-            error: "Internal server error",
-            details: error.message,
-        });
-    }
-};
-
+  res.status(200).json({
+    message: "Song added successfully to the favorite",
+    favorite: updatedFavorite,
+  });
+});
 
 // Remove a song from a favorite
-const removeSongFromFavorite = async (req, res) => {
-    try {
-        const { favoriteId, songId } = req.params;
+const removeSongFromFavorite = catchAsync(async (req, res) => {
+  const { favoriteId, songId } = req.params;
 
-        // Find the favorite
-        const favorite = await Favorite.findOne({ _id: favoriteId, isDeleted: false });
-        if (!favorite) {
-            return res.status(404).json({ error: 'Favorite not found or already deleted' });
-        }
+  const favorite = await Favorite.findOne({ _id: favoriteId, isDeleted: false });
+  if (!favorite) {
+    throw new AppError("Favorite not found or already deleted", 404);
+  }
 
-        // Check if the song exists in the favorite
-        const songIndex = favorite.songs.indexOf(songId);
-        if (songIndex === -1) {
-            return res.status(404).json({ error: 'Song not found in favorite' });
-        }
+  const songIndex = favorite.songs.findIndex(id => id.toString() === songId);
+  if (songIndex === -1) {
+    throw new AppError("Song not found in favorite", 404);
+  }
 
-        // Remove the song from the favorite
-        favorite.songs.splice(songIndex, 1);
-        await favorite.save();
+  favorite.songs.splice(songIndex, 1);
+  await favorite.save();
 
-        // Return the updated favorite
-        const updatedFavorite = await Favorite.findById(favoriteId).populate('songs');
-        res.status(200).json({
-            message: 'Song removed successfully from favorite',
-            favorite: updatedFavorite,
-        });
-    } catch (error) {
-        console.error('Error removing song from favorite:', error.message);
-        res.status(500).json({
-            error: 'Internal server error',
-            details: error.message,
-        });
-    }
+  const updatedFavorite = await Favorite.findById(favoriteId)
+    .populate("songs")
+    .populate("creator", "fullname email username");
+
+  res.status(200).json({
+    message: "Song removed successfully from favorite",
+    favorite: updatedFavorite,
+  });
+});
+
+// Create favorite by creator
+const createFavoriteByCreator = catchAsync(async (req, res) => {
+  const { creatorId } = req.params;
+  const { title } = req.body;
+
+  if (!title) {
+    throw new AppError("Title is required", 400);
+  }
+
+  const creator = await User.findById(creatorId);
+  if (!creator) {
+    throw new AppError("Creator not found", 404);
+  }
+
+  const newFavorite = new Favorite({
+    title,
+    creator: creatorId,
+    songs: [],
+    isDeleted: false,
+    createAt: Date.now(),
+  });
+
+  const savedFavorite = await newFavorite.save();
+  const populatedFavorite = await Favorite.findById(savedFavorite._id)
+    .populate('songs')
+    .populate('creator', 'fullname email username');
+
+  res.status(201).json(populatedFavorite);
+});
+
+// Update favorite by creator
+const updateFavoriteByCreator = catchAsync(async (req, res) => {
+  const { creatorId, favoriteId } = req.params;
+  const { title } = req.body;
+
+  if (!title) {
+    throw new AppError("Title is required", 400);
+  }
+
+  const updatedFavorite = await Favorite.findOneAndUpdate(
+    { _id: favoriteId, creator: creatorId, isDeleted: false },
+    { title },
+    { new: true, runValidators: true }
+  ).populate('songs')
+    .populate('creator', 'fullname email username');
+
+  if (!updatedFavorite) {
+    throw new AppError("Favorite not found or not authorized to update", 404);
+  }
+
+  res.status(200).json(updatedFavorite);
+});
+
+module.exports = {
+  updateFavoriteByCreator,
+  createFavoriteByCreator,
+  createFavorite,
+  getFavorites,
+  getFavorite,
+  updateFavorite,
+  deleteFavorite,
+  getFavoriteByCreator,
+  addSongToFavorite,
+  removeSongFromFavorite,
 };
-
-const createFavoriteByCreator = async (req, res) => {
-    try {
-        const { creatorId } = req.params; // Get the creatorId from route params
-        const { title } = req.body; // Get title from the request body
-
-        // Validate creator (optional, if you need to verify the creator exists in your database)
-        const creator = await User.findById(creatorId); // Assuming User model exists for creators
-        if (!creator) {
-            return res.status(404).json({ error: 'Creator not found' });
-        }
-
-        // Create the new favorite
-        const newFavorite = new Favorite({
-            title,
-            creator: creatorId, // Set creator as the one passed in the params
-            isDeleted: false,
-            createAt: Date.now(),
-        });
-
-        // Save the new favorite
-        const savedFavorite = await newFavorite.save();
-        
-        res.status(201).json(savedFavorite);
-    } catch (error) {
-        return res.status(500).json({ msg: error.message });
-    }
-};
-
-const updateFavoriteByCreator = async (req, res) => {
-    try {
-        const { creatorId, favoriteId } = req.params; // Lấy creatorId và favoriteId từ params
-        const { title } = req.body; // Lấy title từ body
-
-        // Tìm favorite theo favoriteId và đảm bảo creatorId phải trùng khớp với creator của favorite đó
-        const updatedFavorite = await Favorite.findOneAndUpdate(
-            { _id: favoriteId, creator: creatorId }, // Kiểm tra điều kiện creatorId và favoriteId
-            { title: title }, // Chỉ cập nhật title
-            { new: true } // Trả về favorite đã cập nhật
-        );
-
-        // Nếu không tìm thấy favorite hoặc creatorId không khớp, trả về lỗi
-        if (!updatedFavorite) {
-            return res.status(404).json({ error: 'Favorite not found or not authorized to update' });
-        }
-
-        // Trả về favorite đã cập nhật
-        res.status(200).json(updatedFavorite);
-    } catch (error) {
-        res.status(500).json({ error: 'Error updating favorite' });
-    }
-};
-
-module.exports = { updateFavoriteByCreator, createFavoriteByCreator, createFavorite, getFavorites, getFavorite, updateFavorite, deleteFavorite, getFavoriteByCreator, addSongToFavorite, removeSongFromFavorite };
